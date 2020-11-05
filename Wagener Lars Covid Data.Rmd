@@ -1,0 +1,78 @@
+---
+title: "Covid Data"
+author: "Lars Wagener"
+date: "9/6/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+library(plotly)
+library(tidyverse)
+data <- read_csv("Covid_data.csv")
+smaller <- data %>%
+  filter (deaths_9 < 15000)
+
+c4 <- plot_ly(data = data, x = ~state_pop, y = ~cases_4, color = ~state)
+c5 <- plot_ly(data = data, x = ~state_pop, y = ~cases_5, color = ~state)
+c6 <- plot_ly(data = data, x = ~state_pop, y = ~cases_6, color = ~state)
+c7 <- plot_ly(data = data, x = ~state_pop, y = ~cases_7, color = ~state)
+c8 <- plot_ly(data = data, x = ~state_pop, y = ~cases_8, color = ~state)
+c9 <- plot_ly(data = data, x = ~state_pop, y = ~cases_9, color = ~state)
+c4
+c5
+c6
+c7
+c8
+c9
+
+q4 <- plot_ly(data = data, x = ~cases_4, y = ~deaths_4, color = ~state)
+q5 <- plot_ly(data = data, x = ~cases_5, y = ~deaths_5, color = ~state)
+q6 <- plot_ly(data = data, x = ~cases_6, y = ~deaths_6, color = ~state)
+q7 <- plot_ly(data = data, x = ~cases_7, y = ~deaths_7, color = ~state)
+q8 <- plot_ly(data = data, x = ~cases_8, y = ~deaths_8, color = ~state)
+q9 <- plot_ly(data = data, x = ~cases_9, y = ~deaths_9, color = ~state)
+q4
+q5
+q6
+q7
+q8
+q9
+
+s9 <- plot_ly(data = smaller, x = ~cases_9, y = ~deaths_9, color = ~state)
+s9
+
+cor(data$state_pop, data$cases_4)
+cor(data$state_pop, data$cases_5)
+cor(data$state_pop, data$cases_6)
+cor(data$state_pop, data$cases_7)
+cor(data$state_pop, data$cases_8)
+cor(data$state_pop, data$cases_9)
+
+
+cor(data$cases_9, data$deaths_9)
+cor(smaller$deaths_9, smaller$cases_9)
+
+
+
+
+
+ggplot(data = data, mapping = aes(x = region, y = deaths_9)) + 
+      geom_boxplot()
+
+
+ ggplot(data = data, mapping = aes(x = region, y = cases_9)) + 
+      geom_boxplot()
+
+  ggplot(data = data, mapping = aes(x = region, y = state_pop)) + 
+      geom_boxplot()
+  
+plot_ly(data = data, x = ~state, y = ~percentage_cases, color = ~state)
+
+plot_ly(data = data, x = ~state, y = ~per_deaths, color = ~state)
+
+```
